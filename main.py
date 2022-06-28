@@ -1,10 +1,11 @@
-from fastapi import FastAPI, Response, status, HTTPException
+from fastapi import FastAPI, Response, status, HTTPException # FastAPI provides all functionality for API
 from fastapi.params import Body
 from typing import Optional
 from pydantic import BaseModel
 from random import randrange
 
-app = FastAPI() # FastAPI instance named app
+app = FastAPI() 
+# Instance of class FastAPI named app; main point of interaction to create all API
 
 # Path operation
 @app.get("/login") # Decorator turns function below into path operation; method passes in HTTP method to be used
@@ -52,7 +53,7 @@ def get_posts():
 def create_post(post: Post): # Reference Post pydantic model and save it as a variable new_post
     # Will display error if at least one of the categories does not fit the data type
     post_dict = post.dict()
-    post_dict["id"] = randrange(0, 999999999999)
+    post_dict["id"] = randrange(0, 9999999999999999999999999999999999999) # Need to make it such that multiple posts cannot have the same ID
     my_posts.append(post_dict) # Convert pydantic model into dictionary, then add to my_posts
     return {"data": post_dict}
 
